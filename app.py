@@ -6,9 +6,17 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from scipy.sparse import hstack
 import pandas as pd
 from operator import itemgetter
+import nltk
 
-# instantiate VADER
+# Ensure VADER lexicon is available on start (works on Streamlit Cloud)
+try:
+    nltk.data.find("sentiment/vader_lexicon")
+except LookupError:
+    nltk.download("vader_lexicon")
+
+from nltk.sentiment import SentimentIntensityAnalyzer
 sia = SentimentIntensityAnalyzer()
+
 
 # ---------------------------
 # LOAD MODELS
